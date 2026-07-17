@@ -4,7 +4,7 @@ import sqlite3
 import time
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = "supersecretkey"
 
 # Use Zoro provider (more stable)
@@ -17,10 +17,12 @@ HEADERS = {
 }
 
 # -----------------------------
-# Database Setup
+# Database Setup (Render-safe)
 # -----------------------------
+DB_PATH = "/tmp/users.db"  # Render only allows writing in /tmp
+
 def db():
-    conn = sqlite3.connect("users.db")
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -29,6 +31,7 @@ def init_db():
     conn.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)")
     conn.execute("CREATE TABLE IF NOT EXISTS watchlist (id INTEGER PRIMARY KEY, user_id INTEGER, anime_id TEXT, title TEXT)")
     conn.commit()
+
 init_db()
 
 # -----------------------------
@@ -44,11 +47,11 @@ def fetch(url):
     return None
 
 # -----------------------------
-# HOME PAGE
+# HOME PAGE (index.html)
 # -----------------------------
 @app.get("/")
 def home():
-    return render_template("home.html")
+    return render_template("index.html")
 
 # -----------------------------
 # SEARCH PAGE
