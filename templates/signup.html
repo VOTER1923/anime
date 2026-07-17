@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up - AnimeStream</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+.container {
+    max-width: 400px;
+    margin: 80px auto;
+    background: var(--bg-alt);
+    padding: 30px;
+    border-radius: 10px;
+}
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+    background: #1f1f2b;
+    color: var(--text);
+}
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 6px;
+    color: var(--text);
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Account</h2>
+    <form action="/signup" method="post">
+        <input type="text" name="username" placeholder="Choose a username">
+        <input type="password" name="password" placeholder="Choose a password">
+        <button>Create Account</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p>
+</div>
+
+</body>
+</html>

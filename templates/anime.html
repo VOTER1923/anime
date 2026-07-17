@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ anime['title'] }} - AnimeStream</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+.container {
+    padding: 20px;
+}
+.ep {
+    background: #14141f;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+.ep a {
+    color: var(--accent);
+}
+</style>
+</head>
+<body>
+
+<h1 style="padding:20px;">{{ anime['title'] }}</h1>
+
+<div class="container">
+    <p>{{ anime['description'] }}</p>
+
+    <h2>Episodes</h2>
+    {% for ep in episodes %}
+    <div class="ep">
+        Episode {{ ep['number'] }} —
+        <a href="/watch/{{ ep['id'] }}">Watch</a>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

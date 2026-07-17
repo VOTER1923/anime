@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AnimeStream</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+/* Crunchyroll navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 40px;
+    background: #050509;
+    border-bottom: 1px solid #1f1f2b;
+}
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+.brand {
+    font-size: 22px;
+    font-weight: 700;
+}
+.nav-links a {
+    color: var(--muted);
+    margin-left: 20px;
+}
+.nav-right button {
+    margin-left: 10px;
+}
+
+/* Search bar */
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+}
+.search-input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 999px;
+    border: none;
+    background: #1f1f2b;
+    color: var(--text);
+}
+.search-btn {
+    padding: 12px 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 999px;
+    color: var(--text);
+}
+
+/* Anime cards */
+.row {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding: 20px;
+}
+.card {
+    min-width: 150px;
+    background: #14141f;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.card-img {
+    height: 210px;
+    background: #1f1f2b;
+}
+.card-body {
+    padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-left">
+        <div class="logo"></div>
+        <div class="brand">AnimeStream</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dashboard">My Account</a>
+        </div>
+    </div>
+    <div class="nav-right">
+        <button onclick="location.href='/login'">Login</button>
+        <button onclick="location.href='/signup'" style="background:var(--accent);border:none;color:white;">Sign Up</button>
+    </div>
+</div>
+
+<form class="search-form" action="/search" method="get">
+    <input class="search-input" type="text" name="q" placeholder="Search anime...">
+    <button class="search-btn">Search</button>
+</form>
+
+{% if results %}
+<div class="row">
+    {% for item in results %}
+    <a class="card" href="/anime/{{ item['id'] }}">
+        <div class="card-img"></div>
+        <div class="card-body">
+            <div>{{ item['title'] }}</div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+</body>
+</html>

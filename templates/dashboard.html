@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Account - AnimeStream</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: var(--bg-alt);
+    padding: 30px;
+    border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome, {{ username }}</h2>
+
+    <h3>Your Watchlist</h3>
+    {% if watchlist %}
+        <ul>
+        {% for item in watchlist %}
+            <li><a href="/anime/{{ item['id'] }}">{{ item['title'] }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your watchlist is empty.</p>
+    {% endif %}
+
+    <p><a href="/logout">Logout</a></p>
+</div>
+
+</body>
+</html>
